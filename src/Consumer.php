@@ -199,12 +199,12 @@ class Consumer extends Worker
      * @param  WorkerOptions|null  $options
      * @return int
      */
-    public function stop($status = 0, $options = null, $reason = null)
+    public function stop($status = 0, $options = null, $reason = null, $connectionName = null, $queue = null)
     {
         // Tell the server you are going to stop consuming.
         // It will finish up the last message and not send you any more.
         $this->channel->basic_cancel($this->consumerTag, false, true);
 
-        return parent::stop($status, $options);
+        return parent::stop($status, $options, $reason, $connectionName, $queue);
     }
 }
